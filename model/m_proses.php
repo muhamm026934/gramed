@@ -144,6 +144,35 @@
             return $query;
         }
 
+// Tabel buku
+        public function add_book(
+            $id_buku = null,
+            $judul = null,
+            $penerbit = null,
+            $tahun = null,
+            $description = null,
+            $id_user_input_buku = null,
+            $date_user_input_buku = null){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_user;
+            $insert = $this->sql_insert;
+            $sql = $insert;
+            $sql.= $table;
+            $sql.= " SET 
+            id_buku = '',
+            judul = '$judul',
+            penerbit = '$penerbit',
+            tahun = '$tahun',
+            description = '$description',
+            id_user_input_buku = '$id_user_input_buku',
+            date_user_input_buku = '$date_user_input_buku'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
         function __destruct()
         {
             $db = $this->mysqli->conf;
