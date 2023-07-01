@@ -8,6 +8,10 @@
         $result = array();
         $data = new Proses_sql($connection);
 
+        @$target_dir = "./foto_buku/";
+        @$file = $_FILES['files']['name'];
+        @$file_tmp = $_FILES['files']['tmp_name'];
+        @$target_file = $target_dir.basename(@$file);
         @$judul = $_POST['judul'];
         @$penerbit = $_POST['penerbit'];
         @$tahun = $_POST['tahun'];
@@ -45,6 +49,13 @@
             if ($add_buku) {
                 $response["value"] = "1";
                 $response["message"] = "Tambah Data Buku Berhasil";
+                @$move_uploaded_files = move_uploaded_file(@$file_tmp,@$target_file);
+                if (@$move_uploaded_files) {
+                    $response["value_image"] = "1";
+                }else{
+                    $response["value_image"] = "0";
+                }
+
             }else{
                 $response["value"] = "0";
                 $response["message"] = "Tambah Data Buku Gagal";
