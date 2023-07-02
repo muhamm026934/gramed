@@ -149,8 +149,10 @@
             $id_buku = null,
             $judul = null,
             $penerbit = null,
+            $pengarang = null,
             $tahun = null,
             $description = null,
+            $image_book = null,
             $id_user_input_buku = null,
             $date_user_input_buku = null){
             $db = $this->mysqli->conf;
@@ -160,7 +162,7 @@
             $sql.= $table;
             if (@$id_buku != null) {
                 $sql.= " WHERE id_buku = '$id_buku' ";
-            }elseif (@$judul != null || @$penerbit != "") {
+            }elseif (@$judul != null && @$penerbit != "") {
                 $sql.= " WHERE judul = '$judul' AND penerbit = '$penerbit'";
             }else {
                 $sql.= " ORDER BY judul ASC";
@@ -173,8 +175,10 @@
             $id_buku = null,
             $judul = null,
             $penerbit = null,
+            $pengarang = null,
             $tahun = null,
             $description = null,
+            $image_book = null,
             $id_user_input_buku = null,
             $date_user_input_buku = null){
 
@@ -187,8 +191,10 @@
             id_buku = '',
             judul = '$judul',
             penerbit = '$penerbit',
+            pengarang = '$pengarang',
             tahun = '$tahun',
             description = '$description',
+            image_book = '$image_book',
             id_user_input_buku = '$id_user_input_buku',
             date_user_input_buku = '$date_user_input_buku'
             ";		
@@ -201,8 +207,10 @@
             $id_buku = null,
             $judul = null,
             $penerbit = null,
+            $pengarang = null,
             $tahun = null,
             $description = null,
+            $image_book = null,
             $id_user_input_buku = null,
             $date_user_input_buku = null){
 
@@ -214,11 +222,13 @@
             $sql.= " SET 
             judul = '$judul',
             penerbit = '$penerbit',
+            pengarang = '$pengarang',
             tahun = '$tahun',
             description = '$description',
+            image_book = '$image_book',
             id_user_input_buku = '$id_user_input_buku',
             date_user_input_buku = '$date_user_input_buku'
-            WHERE id_buku = '$id_buku',
+            WHERE id_buku = '$id_buku'
             ";		
             
             $query = $db->query($sql) or die($db->error);
@@ -229,6 +239,7 @@
             $id_buku = null,
             $judul = null,
             $penerbit = null,
+            $pengarang = null,
             $tahun = null,
             $description = null,
             $id_user_input_buku = null,
