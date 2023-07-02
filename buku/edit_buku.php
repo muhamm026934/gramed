@@ -43,10 +43,12 @@
         if (@$file != null) {
             $temp = explode(".", @$file);
             $image_book = @$judul . '-' . @$penerbit . '.' . end($temp);
-            @$target_file = $target_dir.basename(@$image_book);
+            
         }else {
             @$image_book = @$image_book_help;
         }
+
+        @$target_file = $target_dir.basename(@$image_book);
 
         if (@$judul == "") {
             $response["value"] = "0";
@@ -82,6 +84,10 @@
                 $response["message"] = "Ubah Data Buku Berhasil";
 
                 if (@$file != null) {
+                    if (file_exists(@$target_dir.$image_book_help)) {
+                        $delete  = unlink(@$target_dir.$image_book_help);
+                        $response["value_delete_image"] = "1";
+                    }
                     @$move_uploaded_files = move_uploaded_file(@$file_tmp,@$target_file);
                     if (@$move_uploaded_files) {
                         $response["value_image"] = "1";

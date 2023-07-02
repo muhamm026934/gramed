@@ -250,7 +250,7 @@
             $delete = $this->sql_delete;
             $sql = $delete;
             $sql.= $table;
-            $sql.= " WHERE id_buku = '$id_buku',
+            $sql.= " WHERE id_buku = '$id_buku'
             ";		
             
             $query = $db->query($sql) or die($db->error);
