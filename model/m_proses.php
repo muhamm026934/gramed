@@ -145,6 +145,30 @@
         }
 
 // Tabel buku
+        public function data_book(
+            $id_buku = null,
+            $judul = null,
+            $penerbit = null,
+            $tahun = null,
+            $description = null,
+            $id_user_input_buku = null,
+            $date_user_input_buku = null){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_book;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_buku != null) {
+                $sql.= " WHERE id_buku = '$id_buku' ";
+            }elseif (@$judul != null || @$penerbit != "") {
+                $sql.= " WHERE judul = '$judul' AND penerbit = '$penerbit'";
+            }else {
+                $sql.= " ORDER BY judul ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
         public function add_book(
             $id_buku = null,
             $judul = null,
@@ -155,7 +179,7 @@
             $date_user_input_buku = null){
 
             $db = $this->mysqli->conf;
-            $table = $this->tb_user;
+            $table = $this->tb_book;
             $insert = $this->sql_insert;
             $sql = $insert;
             $sql.= $table;
@@ -167,6 +191,55 @@
             description = '$description',
             id_user_input_buku = '$id_user_input_buku',
             date_user_input_buku = '$date_user_input_buku'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function edit_book(
+            $id_buku = null,
+            $judul = null,
+            $penerbit = null,
+            $tahun = null,
+            $description = null,
+            $id_user_input_buku = null,
+            $date_user_input_buku = null){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_book;
+            $update = $this->sql_update;
+            $sql = $update;
+            $sql.= $table;
+            $sql.= " SET 
+            judul = '$judul',
+            penerbit = '$penerbit',
+            tahun = '$tahun',
+            description = '$description',
+            id_user_input_buku = '$id_user_input_buku',
+            date_user_input_buku = '$date_user_input_buku'
+            WHERE id_buku = '$id_buku',
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function delete_book(
+            $id_buku = null,
+            $judul = null,
+            $penerbit = null,
+            $tahun = null,
+            $description = null,
+            $id_user_input_buku = null,
+            $date_user_input_buku = null){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_book;
+            $delete = $this->sql_delete;
+            $sql = $delete;
+            $sql.= $table;
+            $sql.= " WHERE id_buku = '$id_buku',
             ";		
             
             $query = $db->query($sql) or die($db->error);

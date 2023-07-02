@@ -8,7 +8,7 @@
         $result = array();
         $data = new Proses_sql($connection);
 
-        @$target_dir = "./foto_buku/";
+        @$target_dir = "../foto_buku/";
         @$file = $_FILES['files']['name'];
         @$file_tmp = $_FILES['files']['tmp_name'];
         @$target_file = $target_dir.basename(@$file);
@@ -19,13 +19,21 @@
         @$id_user_input_buku = $_POST['id_user_input_buku'];
         @$date_user_input_buku = $_POST['date_user_input_buku'];
 
-        @$data_buku = $data->data_buku(@$judul, @$penerbit);
-        @$row_buku = $data_buku->fetch_object();
+        @$data_book = $data->data_book(
+            @$id_buku,
+            @$judul,
+            @$penerbit,
+            @$tahun,
+            @$description,
+            @$id_user_input_buku,
+            @$date_user_input_buku,
+        );
+        @$row_buku = $data_book->fetch_object();
 
         if (@$judul == "") {
             $response["value"] = "0";
             $response["message"] = "Judul Buku Harus Diisi";  
-        }elseif(isset($penerbit)){
+        }elseif($penerbit == ""){
             $response["value"] = "0";
             $response["message"] = "Data Penerbit Harus Diisi";
         }elseif(@$tahun == ""){
@@ -38,15 +46,15 @@
             $response["value"] = "0";
             $response["message"] = "Data Buku Sudah Ada";
         }else {
-            @$add_buku = $data->add_inspek(
+            @$add_book = $data->add_book(
                 @$id_buku,
-                $judul,
-                $penerbit,
-                $tahun,
-                $description,
-                $id_user_input_buku,
-                $date_user_input_buku);
-            if ($add_buku) {
+                @$judul,
+                @$penerbit,
+                @$tahun,
+                @$description,
+                @$id_user_input_buku,
+                @$date_user_input_buku);
+            if ($add_book) {
                 $response["value"] = "1";
                 $response["message"] = "Tambah Data Buku Berhasil";
                 @$move_uploaded_files = move_uploaded_file(@$file_tmp,@$target_file);
