@@ -1,6 +1,6 @@
 <?php
     class Db_table{
-        protected $tb_user = 'user';
+        protected $tb_user = 'tb_user';
         protected $tb_book = 'tb_book';
         protected $tb_stock_book = 'tb_stock_book';
         protected $tb_inspeksi_kapal = 'tb_transaction';
@@ -40,7 +40,7 @@
             return @$result;
         }     
 // Tabel User
-        public function data_user($id_user = null, $nama = null){
+        public function data_user($id_user = null, $name = null){
             $db = $this->mysqli->conf;
             $table = $this->tb_user;
             $select = $this->sql_select;
