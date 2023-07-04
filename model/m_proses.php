@@ -29,7 +29,7 @@
                 $select = $this->sql_select;                
                 $sql = $select;	
                 $sql.= $table;
-                $sql.= " WHERE username = ? AND pasword = ?";
+                $sql.= " WHERE username = ? AND password = ?";
                 $db = $this->mysqli->conf;
                 $query = $db->prepare($sql) or die($db->error);
                 $query->bind_param("ss",$username,$pasword); 
@@ -150,6 +150,8 @@
             $judul = null,
             $penerbit = null,
             $pengarang = null,
+            $price = null,
+            $diskon = null,
             $tahun = null,
             $description = null,
             $image_book = null,
@@ -176,6 +178,8 @@
             $judul = null,
             $penerbit = null,
             $pengarang = null,
+            $price = null,
+            $diskon = null,
             $tahun = null,
             $description = null,
             $image_book = null,
@@ -192,6 +196,8 @@
             judul = '$judul',
             penerbit = '$penerbit',
             pengarang = '$pengarang',
+            price = '$price',
+            diskon = '$diskon',
             tahun = '$tahun',
             description = '$description',
             image_book = '$image_book',
@@ -208,6 +214,8 @@
             $judul = null,
             $penerbit = null,
             $pengarang = null,
+            $price = null,
+            $diskon = null,
             $tahun = null,
             $description = null,
             $image_book = null,
@@ -223,6 +231,8 @@
             judul = '$judul',
             penerbit = '$penerbit',
             pengarang = '$pengarang',
+            price = '$price',
+            diskon = '$diskon',
             tahun = '$tahun',
             description = '$description',
             image_book = '$image_book',
@@ -240,6 +250,8 @@
             $judul = null,
             $penerbit = null,
             $pengarang = null,
+            $price = null,
+            $diskon = null,
             $tahun = null,
             $description = null,
             $id_user_input_buku = null,

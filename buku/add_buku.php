@@ -14,6 +14,8 @@
         @$judul = $_POST['judul'];
         @$penerbit = $_POST['penerbit'];
         @$pengarang = $_POST['pengarang'];
+        @$price = $_POST['price'];
+        @$diskon = $_POST['diskon'];
         @$tahun = $_POST['tahun'];
         @$description = $_POST['description'];
         @$id_user_input_buku = $_POST['id_user_input_buku'];
@@ -28,6 +30,8 @@
             @$judul,
             @$penerbit,
             @$pengarang,
+            @$price,
+            @$diskon,
             @$tahun,
             @$description,
             @$image_book,
@@ -44,6 +48,12 @@
         }elseif($pengarang == ""){
             $response["value"] = "0";
             $response["message"] = "Data Pengarang Harus Diisi";
+        }elseif($price == "" || $price == "0" || $price == 0){
+            $response["value"] = "0";
+            $response["message"] = "Harga Buku Harus Diisi";
+        }elseif(@$diskon >= 100){
+            $response["value"] = "0";
+            $response["message"] = "Diskon Yang Diinput Salah, Lebih Dari 100%";
         }elseif(@$tahun == ""){
             $response["value"] = "0";
             $response["message"] = "Tahun Buku Harus Diisi";
@@ -59,6 +69,8 @@
                 @$judul,
                 @$penerbit,
                 @$pengarang,
+                @$price,
+                @$diskon,
                 @$tahun,
                 @$description,
                 @$image_book,

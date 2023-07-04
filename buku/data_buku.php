@@ -18,6 +18,8 @@
             @$judul,
             @$penerbit,
             @$pengarang,
+            @$price,
+            @$diskon,
             @$tahun,
             @$description,
             @$image_book,
@@ -31,6 +33,10 @@
                 $judul = $row_book->judul;
                 $penerbit = $row_book->penerbit;
                 $pengarang = $row_book->pengarang;
+                $price = $row_book->price;
+                $diskon = $row_book->diskon;
+                $potongan_harga = $price * $diskon / 100;
+                $net_price = round($price - $potongan_harga,2);
                 $tahun = $row_book->tahun;
                 $description = $row_book->description;
                 $image_book = $row_book->image_book;
@@ -40,6 +46,10 @@
                 $id_buku = "";	
                 $judul = "";	
                 $penerbit = "";
+                $price = "";
+                $diskon = "";
+                $potongan_harga = "";
+                $net_price = "";
                 $pengarang = "";
                 $tahun = "";	
                 $description = "";
@@ -50,7 +60,11 @@
             $b['id_buku'] = $id_buku; 
             $b['judul'] = $judul; 
             $b['penerbit'] = $penerbit;
-            $b['pengarang'] = $pengarang;    
+            $b['pengarang'] = $pengarang; 
+            $b['price'] = strval(number_format($price,2,',','.'));     
+            $b['diskon'] = strval($diskon); 
+            $b['potongan_harga'] = strval(number_format($potongan_harga,2,',','.'));  
+            $b['net_price'] = strval(number_format($net_price,2,',','.'));  
             $b['tahun'] = $tahun;   
             $b['description'] = $description;  
             $b['image_book'] = $image_book;  

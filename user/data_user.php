@@ -8,10 +8,9 @@
         $result = array();
         $data = new Proses_sql($connection);
 
-        @$id_buku = $_POST['id_buku'];
-        @$judul = $_POST['judul'];
-        @$penerbit = $_POST['penerbit'];
-        @$tahun = $_POST['tahun'];
+        @$id_user = $_POST['id_user'];
+        @$name = $_POST['name'];
+        @$username = $_POST['username'];
 
         @$data_user = $data->data_user(
             @$id_user,
@@ -50,7 +49,6 @@
             $b['no_telp'] = $no_telp;  
             $b['token'] = $token;   
             array_push($result, $b);
-
         }
         echo json_encode($result);
     }
