@@ -269,6 +269,112 @@
             return $query;
         }  
 
+        // Tabel stock buku
+        public function data_stock_book(
+            $id_stock = null,
+            $id_book = null,
+            $qty_gr = null,
+            $date_gr = null,
+            $no_note = null,
+            $id_user_input_stock = null,
+            $date_user_input_stock = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_stock_book;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_stock != null) {
+                $sql.= " WHERE id_stock = '$id_stock' ";
+            }elseif (@$id_book != null && @$no_note != "") {
+                $sql.= " WHERE id_book = '$id_book' AND no_note = '$no_note'";
+            }else {
+                $sql.= " ORDER BY id_book ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
+        public function add_stock_book(
+            $id_stock = null,
+            $id_book = null,
+            $qty_gr = null,
+            $date_gr = null,
+            $no_note = null,
+            $id_user_input_stock = null,
+            $date_user_input_stock = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_stock_book;
+            $insert = $this->sql_insert;
+            $sql = $insert;
+            $sql.= $table;
+            $sql.= " SET 
+            id_stock = '',
+            id_book = '$id_book',
+            qty_gr = '$qty_gr',
+            date_gr = '$date_gr',
+            no_note = '$no_note',
+            id_user_input_stock = '$id_user_input_stock',
+            date_user_input_stock = '$date_user_input_stock'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function edit_stock_book(
+            $id_stock = null,
+            $id_book = null,
+            $qty_gr = null,
+            $date_gr = null,
+            $no_note = null,
+            $id_user_input_stock = null,
+            $date_user_input_stock = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_stock_book;
+            $update = $this->sql_update;
+            $sql = $update;
+            $sql.= $table;
+            $sql.= " SET 
+            id_book = '$id_book',
+            qty_gr = '$qty_gr',
+            date_gr = '$date_gr',
+            no_note = '$no_note',
+            id_user_input_stock = '$id_user_input_stock',
+            date_user_input_stock = '$date_user_input_stock'
+            WHERE id_stock = '$id_stock'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function delete_stock_book(
+            $id_stock = null,
+            $id_book = null,
+            $qty_gr = null,
+            $date_gr = null,
+            $no_note = null,
+            $id_user_input_stock = null,
+            $date_user_input_stock = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_stock_book;
+            $delete = $this->sql_delete;
+            $sql = $delete;
+            $sql.= $table;
+            $sql.= " WHERE id_stock = '$id_stock'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }         
+
         function __destruct()
         {
             $db = $this->mysqli->conf;
