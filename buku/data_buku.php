@@ -62,10 +62,12 @@
             $b['penerbit'] = $penerbit;
             $b['pengarang'] = $pengarang; 
             $b['price'] = strval(number_format($price,2,',','.'));     
+            $b['price_buku'] = $price;
             $b['diskon'] = strval($diskon); 
             $b['potongan_harga'] = strval(number_format($potongan_harga,2,',','.'));  
+            $b['harga_jual'] = strval($net_price); 
             $b['net_price'] = strval(number_format($net_price,2,',','.'));  
-            $b['tahun'] = $tahun;   
+            $b['tahun'] = $tahun;
             $b['description'] = $description;  
             $b['image_book'] = $image_book;  
             $b['id_user_input_buku'] = $id_user_input_buku;  
