@@ -28,14 +28,22 @@
             @$name
         );
 
-        if (@$password1 == @$password2) {
-            @$password = @$password1;
-        }
-
         @$row_user = $data_user->fetch_object();
         @$id_user_cek = $row_user->id_user;
         @$name_cek = $row_user->id_user;
         @$username_cek = $row_user->username;
+        @$password_cek = $row_user->password;
+        
+        if (@$password1 == @$password2) {
+            
+            if (@$password_cek == @$password1 ) {
+                @$password = @$password1;
+            }else {
+                @$password = md5(@$password1);
+            }
+        }
+
+
 
         if (@$name == "") {
             $response["value"] = "0";

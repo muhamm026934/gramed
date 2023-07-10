@@ -7,25 +7,56 @@
         include "../model/m_proses.php";
         $result = array();
         $data = new Proses_sql($connection);
-
+        @$action = $_POST['ACTION'];
         @$id_buku = $_POST['id_buku'];
         @$judul = $_POST['judul'];
         @$penerbit = $_POST['penerbit'];
         @$tahun = $_POST['tahun'];
 
-        @$data_book = $data->data_book(
-            @$id_buku,
-            @$judul,
-            @$penerbit,
-            @$pengarang,
-            @$price,
-            @$diskon,
-            @$tahun,
-            @$description,
-            @$image_book,
-            @$id_user_input_buku,
-            @$date_user_input_buku
-        );
+        if (@$action == "diskon") {
+            
+            @$data_book = $data->data_book_home(
+                @$id_buku,
+                @$judul,
+                @$penerbit,
+                @$pengarang,
+                @$price,
+                @$diskon = "1",
+                @$tahun,
+                @$description,
+                @$image_book,
+                @$id_user_input_buku,
+                @$date_user_input_buku
+            );  
+        }elseif (@$action == "no_diskon") {
+            @$data_book = $data->data_book_home(
+                @$id_buku,
+                @$judul,
+                @$penerbit,
+                @$pengarang,
+                @$price,
+                @$diskon = "0",
+                @$tahun,
+                @$description,
+                @$image_book,
+                @$id_user_input_buku,
+                @$date_user_input_buku
+            );  
+        }else {
+            @$data_book = $data->data_book(
+                @$id_buku,
+                @$judul,
+                @$penerbit,
+                @$pengarang,
+                @$price,
+                @$diskon,
+                @$tahun,
+                @$description,
+                @$image_book,
+                @$id_user_input_buku,
+                @$date_user_input_buku
+            );    
+        }
 
             while ($row_book = $data_book->fetch_object()) {
                 if (isset($row_book)) {

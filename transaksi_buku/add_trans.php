@@ -15,6 +15,8 @@
         @$date_transaction = $_POST['date_transaction'];
         @$total_payment = $_POST['total_payment'];
         @$state_transaction = $_POST['state_transaction'];
+        @$id_user = $_POST['id_user'];
+        @$alamat = $_POST['alamat'];
         
         @$data_transaksi = $data->data_transaksi(
             @$id_transaction,
@@ -23,7 +25,9 @@
             @$code_transaction,
             @$date_transaction,
             @$total_payment,
-            @$state_transaction
+            @$state_transaction,
+            @$id_user,
+            @$alamat
         );
 
         @$row_transaksi = $data_transaksi->fetch_object();
@@ -39,7 +43,9 @@
                 @$code_transaction,
                 @$date_transaction,
                 @$total_payment,
-                @$state_transaction
+                @$state_transaction,
+                @$id_user,
+                @$alamat
             );
             if ($add_trans) {
                 $response["value"] = "1";

@@ -29,7 +29,7 @@
         );
 
         if (@$password1 == @$password2) {
-            @$password = @$password1;
+            @$password = md5(@$password1);
         }
 
         @$row_user = $data_user->fetch_object();

@@ -23,8 +23,15 @@ printExampleWarningMessage();
 // Config::$is3ds = true;
 
 // Required
+
+@$judul = $_GET['judul'];
+@$qty = $_GET['qty'];
+@$jml_bayar = $_GET['jml_bayar'];
+@$code_byr = $_GET['code_byr'];
+@$nama = $_GET['nama'];
+
 $transaction_details = array(
-    'order_id' => rand(),
+    'order_id' => strval($code_byr),
     'gross_amount' => 145000, // no decimal allowed for creditcard
 );
 
@@ -37,15 +44,15 @@ $item1_details = array(
 );
 
 // Optional
-$item2_details = array(
-    'id' => 'a2',
-    'price' => 45000,
-    'quantity' => 1,
-    'name' => "Orange"
-);
+// $item2_details = array(
+//     'id' => 'a2',
+//     'price' => 45000,
+//     'quantity' => 1,
+//     'name' => "Orange"
+// );
 
 // Optional
-$item_details = array ($item1_details, $item2_details);
+$item_details = array ($item1_details);
 
 // Optional
 $billing_address = array(

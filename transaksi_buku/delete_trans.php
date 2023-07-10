@@ -18,7 +18,9 @@
                 @$code_transaction,
                 @$date_transaction,
                 @$total_payment,
-                @$state_transaction
+                @$state_transaction,
+                @$id_user,
+                @$alamat
             );
                            
                 if (@$delete_trans) {

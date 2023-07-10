@@ -23,7 +23,9 @@
             @$code_transaction,
             @$date_transaction,
             @$total_payment,
-            @$state_transaction
+            @$state_transaction,
+            @$id_user,
+            @$alamat
         );
 
             while ($row_transaksi = $data_transaksi->fetch_object()) {
@@ -36,6 +38,8 @@
                 $total_payment = $row_transaksi->total_payment;
                 $total_payment_price = round($total_payment,2);
                 $state_transaction = $row_transaksi->state_transaction;
+                $id_user = $row_transaksi->id_user;
+                $alamat = $row_transaksi->alamat;
                 }else{
                 $id_transaction = "";	
                 $qty_pick = "";	
@@ -45,6 +49,8 @@
                 $total_payment = "";
                 $total_payment_price = "";
                 $state_transaction = "";
+                $id_user = "";
+                $alamat = "";
                 }
             $b['id_transaction'] = $id_transaction; 
             $b['qty_pick'] = $qty_pick; 
@@ -53,6 +59,9 @@
             $b['date_transaction'] = $date_transaction; 
             $b['total_payment'] = $total_payment; 
             $b['total_payment_price'] = strval(number_format($total_payment_price,2,',','.'));     
+            $b['state_transaction'] = $state_transaction; 
+            $b['id_user'] = $id_user; 
+            $b['alamat'] = $alamat; 
 
             @$id_book = $id_buku;
             @$data_stock_book_qty_gr = $data->data_stock_book_qty_gr(

@@ -145,6 +145,35 @@
         }
 
 // Tabel buku
+        public function data_book_home(
+            $id_buku = null,
+            $judul = null,
+            $penerbit = null,
+            $pengarang = null,
+            $price = null,
+            $diskon = null,
+            $tahun = null,
+            $description = null,
+            $image_book = null,
+            $id_user_input_buku = null,
+            $date_user_input_buku = null){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_book;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_buku != null) {
+                $sql.= " WHERE id_buku = '$id_buku' ";
+            }elseif (@$diskon == "0") {
+                $sql.= " WHERE diskon = '0'";
+            }elseif (@$diskon != "0") {
+                $sql.= " WHERE diskon != '0'";
+            }else {
+                $sql.= " ORDER BY judul ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
         public function data_book(
             $id_buku = null,
             $judul = null,
@@ -409,7 +438,9 @@
             $code_transaction = null,
             $date_transaction = null,
             $total_payment = null,
-            $state_transaction = null
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
             ){
             $db = $this->mysqli->conf;
             $table = $this->tb_transaction;
@@ -436,7 +467,9 @@
             $code_transaction = null,
             $date_transaction = null,
             $total_payment = null,
-            $state_transaction = null
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
             ){
             $db = $this->mysqli->conf;
             $table = $this->tb_transaction;
@@ -458,7 +491,9 @@
             $code_transaction = null,
             $date_transaction = null,
             $total_payment = null,
-            $state_transaction = null
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
             ){
 
             $db = $this->mysqli->conf;
@@ -473,7 +508,9 @@
             code_transaction = '$code_transaction',
             date_transaction = '$date_transaction',
             total_payment = '$total_payment',
-            state_transaction = '$state_transaction'
+            state_transaction = '$state_transaction',
+            id_user = '$id_user',
+            alamat = '$alamat'
             ";		
             
             $query = $db->query($sql) or die($db->error);
@@ -487,7 +524,9 @@
             $code_transaction = null,
             $date_transaction = null,
             $total_payment = null,
-            $state_transaction = null
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
             ){
 
             $db = $this->mysqli->conf;
@@ -501,13 +540,15 @@
             code_transaction = '$code_transaction',
             date_transaction = '$date_transaction',
             total_payment = '$total_payment',
-            state_transaction = '$state_transaction'
+            state_transaction = '$state_transaction',
+            id_user = '$id_user',
+            alamat = '$alamat'
             WHERE id_transaction = '$id_transaction'
             ";		
             
             $query = $db->query($sql) or die($db->error);
             return $query;
-        }  
+        }
 
         public function delete_trans(
             $id_transaction = null,
@@ -516,7 +557,9 @@
             $code_transaction = null,
             $date_transaction = null,
             $total_payment = null,
-            $state_transaction = null
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
             ){
 
             $db = $this->mysqli->conf;
