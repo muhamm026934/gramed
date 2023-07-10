@@ -3,7 +3,7 @@
         protected $tb_user = 'tb_user';
         protected $tb_book = 'tb_book';
         protected $tb_stock_book = 'tb_stock_book';
-        protected $tb_inspeksi_kapal = 'tb_transaction';
+        protected $tb_transaction = 'tb_transaction';
                       
 		protected $sql_select_distinct = "SELECT DISTINCT ";
 		protected $sql_select = "SELECT * FROM ";
@@ -295,6 +295,32 @@
             return $query;
         }
 
+        public function data_stock_book_qty_gr(
+            $id_stock = null,
+            $id_book = null,
+            $qty_gr = null,
+            $date_gr = null,
+            $no_note = null,
+            $id_user_input_stock = null,
+            $date_user_input_stock = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_stock_book;
+            $sql_select_sum = $this->sql_select_sum;
+            $sql= $sql_select_sum;
+            $sql.="(qty_gr) AS total_qty_gr FROM ";
+            $sql.= $table;
+            if (@$id_stock != null) {
+                $sql.= " WHERE id_stock = '$id_stock' ";
+            }elseif (@$id_book != null) {
+                $sql.= " WHERE id_book = '$id_book'";
+            }else {
+                $sql.= " ORDER BY id_book ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
         public function add_stock_book(
             $id_stock = null,
             $id_book = null,
@@ -375,6 +401,137 @@
             return $query;
         }         
 
+        // Tabel transaksi buku
+        public function data_transaksi(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_transaction != null) {
+                $sql.= " WHERE id_transaction = '$id_transaction' ";
+            }elseif (@$id_book != null) {
+                $sql.= " WHERE id_book = '$id_book'";
+            }elseif (@$code_transaction != null) {
+                $sql.= " WHERE code_transaction = '$code_transaction'";
+            }else {
+                $sql.= " ORDER BY date_transaction ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
+        public function data_transaksi_total_qty(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $sql_select_sum = $this->sql_select_sum;
+            $sql= $sql_select_sum;
+            $sql.="(qty_pick) AS total_qty_pick FROM ";
+            $sql.= $table;
+            if (@$id_book != null) {
+                $sql.= " WHERE id_book = '$id_book' ";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
+        public function add_trans(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $insert = $this->sql_insert;
+            $sql = $insert;
+            $sql.= $table;
+            $sql.= " SET 
+            id_transaction = '',
+            qty_pick = '$qty_pick',
+            id_book = '$id_book',
+            code_transaction = '$code_transaction',
+            date_transaction = '$date_transaction',
+            total_payment = '$total_payment',
+            state_transaction = '$state_transaction'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function edit_trans(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $update = $this->sql_update;
+            $sql = $update;
+            $sql.= $table;
+            $sql.= " SET 
+            qty_pick = '$qty_pick',
+            id_book = '$id_book',
+            code_transaction = '$code_transaction',
+            date_transaction = '$date_transaction',
+            total_payment = '$total_payment',
+            state_transaction = '$state_transaction'
+            WHERE id_transaction = '$id_transaction'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+
+        public function delete_trans(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $delete = $this->sql_delete;
+            $sql = $delete;
+            $sql.= $table;
+            $sql.= " WHERE id_transaction = '$id_transaction'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }  
+        
+        
         function __destruct()
         {
             $db = $this->mysqli->conf;

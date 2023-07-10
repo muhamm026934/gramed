@@ -47,7 +47,7 @@
                 @$id_user_input_stock,
                 @$date_user_input_stock
             );
-            if ($add_book) {
+            if ($add_stock_book) {
                 $response["value"] = "1";
                 $response["message"] = "Tambah Stock Buku Berhasil";                
             }else{

@@ -48,7 +48,8 @@
             $b['no_note'] = $no_note;
             $b['id_user_input_stock'] = $id_user_input_stock;  
             $b['date_user_input_stock'] = $date_user_input_stock;  
-
+             
+            @$id_buku = @$id_book;
             @$data_book = $data->data_book(
                 @$id_buku,
                 @$judul,

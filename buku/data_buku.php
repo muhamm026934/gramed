@@ -71,7 +71,25 @@
             $b['description'] = $description;  
             $b['image_book'] = $image_book;  
             $b['id_user_input_buku'] = $id_user_input_buku;  
-            $b['date_user_input_buku'] = $date_user_input_buku;   
+            $b['date_user_input_buku'] = $date_user_input_buku;
+
+            @$id_book = $id_buku;
+            @$data_stock_book_qty_gr = $data->data_stock_book_qty_gr(
+                @$id_stock,
+                @$id_book,
+                @$qty_gr,
+                @$date_gr,
+                @$no_note,
+                @$id_user_input_stock,
+                @$date_user_input_stock
+            );
+                $row_stock_book = $data_stock_book_qty_gr->fetch_object();
+                    if (isset($row_stock_book)) {
+                    @$total_qty_gr = $row_stock_book->total_qty_gr;
+                    }else{
+                    @$total_qty_gr = "0";
+                    }
+                $b['total_qty_gr'] = @$total_qty_gr == null ? "0":@$total_qty_gr;
             array_push($result, $b);
 
         }
