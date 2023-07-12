@@ -15,19 +15,34 @@
         @$date_transaction = $_POST['date_transaction'];
         @$total_payment = $_POST['total_payment'];
         @$state_transaction = $_POST['state_transaction'];
+        @$level = $_POST['level'];
+        @$id_user = $_POST['id_user'];
 
-        @$data_transaksi = $data->data_transaksi(
-            @$id_transaction,
-            @$qty_pick,
-            @$id_book,
-            @$code_transaction,
-            @$date_transaction,
-            @$total_payment,
-            @$state_transaction,
-            @$id_user,
-            @$alamat
-        );
-
+        if ($level == "admin") {
+            @$data_transaksi = $data->data_transaksi(
+                @$id_transaction,
+                @$qty_pick,
+                @$id_book,
+                @$code_transaction,
+                @$date_transaction,
+                @$total_payment,
+                @$state_transaction,
+                @$id_user,
+                @$alamat
+            );
+        }else{
+            @$data_transaksi = $data->data_transaksi_user(
+                @$id_transaction,
+                @$qty_pick,
+                @$id_book,
+                @$code_transaction,
+                @$date_transaction,
+                @$total_payment,
+                @$state_transaction,
+                @$id_user,
+                @$alamat
+            );            
+        }
             while ($row_transaksi = $data_transaksi->fetch_object()) {
                 if (isset($row_transaksi)) {
                 $id_transaction = $row_transaksi->id_transaction;
@@ -63,7 +78,6 @@
             $b['id_user'] = $id_user; 
             $b['alamat'] = $alamat; 
 
-            @$id_book = $id_buku;
             @$data_stock_book_qty_gr = $data->data_stock_book_qty_gr(
                 @$id_stock,
                 @$id_book,
@@ -83,7 +97,7 @@
 
                 @$id_buku = $id_book;
                 @$data_book = $data->data_book(
-                    @$id_buku,
+                    @$id_book,
                     @$judul,
                     @$penerbit,
                     @$pengarang,

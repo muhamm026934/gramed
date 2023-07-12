@@ -32,9 +32,12 @@
 
         @$row_transaksi = $data_transaksi->fetch_object();
 
-        if (@$id_transaction == "") {
+        if (@$id_user == "") {
             $response["value"] = "0";
-            $response["message"] = "Transaksi Buku Gagal";  
+            $response["message"] = "Transaksi Buku Gagal, Hubungi Admin";  
+        }elseif(@$alamat == "" && @$code_transaction !=""){
+            $response["value"] = "0";
+            $response["message"] = "Alamat Harus Diisi";  
         }else {
             @$add_trans = $data->add_trans(
                 @$id_transaction,

@@ -27,20 +27,21 @@ printExampleWarningMessage();
 @$judul = $_GET['judul'];
 @$qty = $_GET['qty'];
 @$jml_bayar = $_GET['jml_bayar'];
+@$rand = rand();
 @$code_byr = $_GET['code_byr'];
 @$nama = $_GET['nama'];
 
 $transaction_details = array(
-    'order_id' => strval($code_byr),
-    'gross_amount' => 145000, // no decimal allowed for creditcard
+    'order_id' => $code_byr,
+    'gross_amount' => $jml_bayar, // no decimal allowed for creditcard
 );
 
 // Optional
 $item1_details = array(
-    'id' => 'a1',
-    'price' => 50000,
-    'quantity' => 2,
-    'name' => "Apple"
+    'id' => $code_byr,
+    'price' => $jml_bayar,
+    'quantity' => $qty,
+    'name' => $judul
 );
 
 // Optional
@@ -56,34 +57,23 @@ $item_details = array ($item1_details);
 
 // Optional
 $billing_address = array(
-    'first_name'    => "Andri",
-    'last_name'     => "Litani",
-    'address'       => "Mangga 20",
-    'city'          => "Jakarta",
-    'postal_code'   => "16602",
-    'phone'         => "081122334455",
-    'country_code'  => 'IDN'
+    'first_name'    => $nama
 );
 
 // Optional
-$shipping_address = array(
-    'first_name'    => "Obet",
-    'last_name'     => "Supriadi",
-    'address'       => "Manggis 90",
-    'city'          => "Jakarta",
-    'postal_code'   => "16601",
-    'phone'         => "08113366345",
-    'country_code'  => 'IDN'
-);
+// $shipping_address = array(
+//     'first_name'    => "Obet",
+//     'last_name'     => "Supriadi",
+//     'address'       => "Manggis 90",
+//     'city'          => "Jakarta",
+//     'postal_code'   => "16601",
+//     'phone'         => "08113366345",
+//     'country_code'  => 'IDN'
+// );
 
 // Optional
 $customer_details = array(
-    'first_name'    => "Andri",
-    'last_name'     => "Litani",
-    'email'         => "andri@litani.com",
-    'phone'         => "081122334455",
-    'billing_address'  => $billing_address,
-    'shipping_address' => $shipping_address
+    'first_name'    => $nama
 );
 
 // Fill SNAP API parameter

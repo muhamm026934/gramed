@@ -18,7 +18,7 @@
         @$id_user = $_POST['id_user'];
         @$alamat = $_POST['alamat'];
         
-        @$data_transaksi = $data->data_transaksi(
+        @$data_transaksi = $data->data_transaksi_code_trans(
             @$id_transaction,
             @$qty_pick,
             @$id_book,
@@ -29,12 +29,15 @@
             @$id_user,
             @$alamat
         );
-
+        @$row_trans = $data_transaksi->fetch_object();
         @$row_transaksi = $data_transaksi->fetch_object();
 
         if (@$id_transaction == "") {
             $response["value"] = "0";
-            $response["message"] = "Ubah Transaksi Buku Gagal";  
+            $response["message"] = "Ubah Transaksi Buku Gagal , Infokan Ke Admin";  
+        }elseif (@$code_transaction != "" && isset($row_trans)) {
+            $response["value"] = "0";
+            $response["message"] = "Ubah Transaksi Buku Gagal , Code Sudah Ada"; 
         }else {
             @$edit_trans = $data->edit_trans(
                 @$id_transaction,

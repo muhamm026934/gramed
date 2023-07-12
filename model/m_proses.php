@@ -460,6 +460,55 @@
             return $query;
         }
 
+        public function data_transaksi_user(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$id_user != null) {
+                $sql.= " WHERE id_user = '$id_user' ";
+            }else {
+                $sql.= " ORDER BY date_transaction ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+        public function data_transaksi_code_trans(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
+            ){
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $select = $this->sql_select;
+            $sql= $select;
+            $sql.= $table;
+            if (@$code_transaction != null) {
+                $sql.= " WHERE code_transaction = '$code_transaction' ";
+            }else {
+                $sql.= " ORDER BY date_transaction ASC";
+            }
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }        
+
         public function data_transaksi_total_qty(
             $id_transaction = null,
             $qty_pick = null,
