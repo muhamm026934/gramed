@@ -26,57 +26,60 @@ $order_id = $notif->order_id;
 $fraud = $notif->fraud_status;
 
 
+
+
 if ($transaction == 'settlement') {
     $servername = "localhost";
     $username = "stat9742_stra46";
     $password = "Trakindo#46";
     $dbname = "stat9742_dg_gramed";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    $sql = "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'";
-    $conn->query($sql);
-    $conn->close();
-
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+    
+    $result = mysqli_query($con, "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'");
+    mysqli_close($con);
+    
 } else if ($transaction == 'pending') {
     $servername = "localhost";
     $username = "stat9742_stra46";
     $password = "Trakindo#46";
     $dbname = "stat9742_dg_gramed";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    $sql = "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'";
-    $conn->query($sql);
-    $conn->close();
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+    
+    $result = mysqli_query($con, "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'");
+    mysqli_close($con);
+    
 } else if ($transaction == 'deny') {
     $servername = "localhost";
     $username = "stat9742_stra46";
     $password = "Trakindo#46";
     $dbname = "stat9742_dg_gramed";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    $sql = "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'";
-    $conn->query($sql);
-    $conn->close();
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+    
+    $result = mysqli_query($con, "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'");
+    mysqli_close($con);
 } else if ($transaction == 'expire') {
     $servername = "localhost";
     $username = "stat9742_stra46";
     $password = "Trakindo#46";
     $dbname = "stat9742_dg_gramed";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    $sql = "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'";
-    $conn->query($sql);
-    $conn->close();
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+    
+    $result = mysqli_query($con, "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'");
+    mysqli_close($con);
 } else if ($transaction == 'cancel') {
     $servername = "localhost";
     $username = "stat9742_stra46";
     $password = "Trakindo#46";
     $dbname = "stat9742_dg_gramed";
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    $sql = "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'";
-    $conn->query($sql);
-    $conn->close();
+    $con = mysqli_connect($servername,$username,$password,$dbname);
+    
+    $result = mysqli_query($con, "UPDATE tb_transaction SET state_transaction='$transaction' WHERE code_transaction = '$order_id'");
+    mysqli_close($con);
 }
 
 function printExampleWarningMessage() {
