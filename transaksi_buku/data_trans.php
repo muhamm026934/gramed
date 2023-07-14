@@ -7,7 +7,7 @@
         include "../model/m_proses.php";
         $result = array();
         $data = new Proses_sql($connection);
-
+        @$action = $_POST['ACTION'];
         @$id_transaction = $_POST['id_transaction'];
         @$qty_pick = $_POST['qty_pick'];
         @$id_book = $_POST['id_book'];
@@ -31,17 +31,19 @@
                 @$alamat
             );
         }else{
-            @$data_transaksi = $data->data_transaksi_user(
-                @$id_transaction,
-                @$qty_pick,
-                @$id_book,
-                @$code_transaction,
-                @$date_transaction,
-                @$total_payment,
-                @$state_transaction,
-                @$id_user,
-                @$alamat
-            );            
+                @$data_transaksi = $data->data_transaksi_user(
+                    @$id_transaction,
+                    @$qty_pick,
+                    @$id_book,
+                    @$code_transaction,
+                    @$date_transaction,
+                    @$total_payment,
+                    @$state_transaction,
+                    @$id_user,
+                    @$alamat,
+                    @$action
+                ); 
+           
         }
             while ($row_transaksi = $data_transaksi->fetch_object()) {
                 if (isset($row_transaksi)) {

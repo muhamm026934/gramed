@@ -195,6 +195,8 @@
                 $sql.= " WHERE id_buku = '$id_buku' ";
             }elseif (@$judul != null && @$penerbit != "") {
                 $sql.= " WHERE judul = '$judul' AND penerbit = '$penerbit'";
+            }elseif (@$judul != null && @$penerbit == "") {
+                $sql.= " WHERE judul LIKE '%$judul%'";
             }else {
                 $sql.= " ORDER BY judul ASC";
             }
@@ -469,15 +471,18 @@
             $total_payment = null,
             $state_transaction = null,
             $id_user = null,
-            $alamat = null
+            $alamat = null,
+            $action= null
             ){
             $db = $this->mysqli->conf;
             $table = $this->tb_transaction;
             $select = $this->sql_select;
             $sql= $select;
             $sql.= $table;
-            if (@$id_user != null) {
-                $sql.= " WHERE id_user = '$id_user' ";
+            if (@$id_user != null && $action == "") {
+                $sql.= " WHERE id_user = '$id_user' AND state_transaction = '' ";
+            }elseif(@$id_user != null && $action != "") {
+                $sql.= " WHERE id_user = '$id_user' AND state_transaction != '' ";
             }else {
                 $sql.= " ORDER BY date_transaction ASC";
             }
@@ -593,6 +598,32 @@
             id_user = '$id_user',
             alamat = '$alamat'
             WHERE id_transaction = '$id_transaction'
+            ";		
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
+
+        public function edit_trans_handler(
+            $id_transaction = null,
+            $qty_pick = null,
+            $id_book = null,
+            $code_transaction = null,
+            $date_transaction = null,
+            $total_payment = null,
+            $state_transaction = null,
+            $id_user = null,
+            $alamat = null
+            ){
+
+            $db = $this->mysqli->conf;
+            $table = $this->tb_transaction;
+            $update = $this->sql_update;
+            $sql = $update;
+            $sql.= $table;
+            $sql.= " SET 
+            state_transaction = '$state_transaction'
+            WHERE code_transaction = '$code_transaction'
             ";		
             
             $query = $db->query($sql) or die($db->error);

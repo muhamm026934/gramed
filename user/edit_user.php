@@ -63,7 +63,7 @@
         }elseif(@$level == ""){
             $response["value"] = "0";
             $response["message"] = "Level Harus Diisi";
-        }elseif(@$id_user != @$id_user && $username == $username_cek){
+        }elseif(@$id_user != @$id_user_cek && $username == $username_cek){
             $response["value"] = "0";
             $response["message"] = "Username Sudah Ada Silahkan Ganti !";
         }else {
