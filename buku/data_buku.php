@@ -121,6 +121,33 @@
                     @$total_qty_gr = "0";
                     }
                 $b['total_qty_gr'] = @$total_qty_gr == null ? "0":@$total_qty_gr;
+
+                @$data_transaksi_total_qty = $data->data_transaksi_total_qty(
+                    @$id_transaction,
+                    @$qty_pick,
+                    @$id_book,
+                    @$code_transaction,
+                    @$date_transaction,
+                    @$total_payment,
+                    @$state_transaction,
+                    @$id_user,
+                    @$alamat
+                );
+                $row_transaksi = $data_transaksi_total_qty->fetch_object();
+                    if (isset($row_transaksi)) {
+                    @$total_qty_pick = $row_transaksi->total_qty_pick;
+                    }else{
+                    @$total_qty_pick = "0";
+                    }
+                $b['total_qty_pick'] = @$total_qty_pick == null ? "0":@$total_qty_pick;
+                
+                if (@$total_qty_gr - @$total_qty_pick < 0) {
+                    @$sisa_stock = 0;
+                }else {
+                    @$sisa_stock = @$total_qty_gr - @$total_qty_pick;
+                }
+                $b['sisa_stock'] = strval(@$sisa_stock);
+
             array_push($result, $b);
 
         }

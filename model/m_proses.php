@@ -532,7 +532,7 @@
             $sql.="(qty_pick) AS total_qty_pick FROM ";
             $sql.= $table;
             if (@$id_book != null) {
-                $sql.= " WHERE id_book = '$id_book' ";
+                $sql.= " WHERE id_book = '$id_book' AND state_transaction = 'settlement' ";
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
